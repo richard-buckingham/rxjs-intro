@@ -6,23 +6,13 @@ import {MyObserver} from './models/observer';
 let numbers = [1, 5, 10];
 let source = Observable.from(numbers);
 
-// implement an observer to listen to observable ( the stream of data, eg: the array )
-/*
-class MyObserver implements Observer<number> {
-
-    next(value) {
-        console.log(`in next: value: ${value}`);
-    }
-
-    error(e) {
-        console.log(`error: ${e}`);
-    }
-
-    complete() {
-        console.log(`complete`);
-    }
-}
-*/
-
+// use my custom class observer
 source.subscribe(new MyObserver());
 source.subscribe(new MyObserver());
+
+// use my inline observer
+source.subscribe(
+    value => console.log(`next function, fat arrow syntax: value: ${value}`),
+    e => console.log(`error function, fat arrow syntax: value: ${e}`),
+    () => console.log(`complete function, fat arrow syntax.`)
+);
