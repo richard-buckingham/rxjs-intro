@@ -3,10 +3,22 @@ import { Observable } from "rxjs";
 // create an observable object
 let numbers = [1, 5, 10];
 let source = Observable.create(observer => {
-    for (let n of numbers) {
-        observer.next(n);
+
+    let index = 0;
+
+    // define function
+    let produceValue = () => {
+        observer.next(numbers[index++]);
+
+        // simulate data coming in over time.
+        if (index < numbers.length)
+            setTimeout(produceValue, 3000);
+        else
+            observer.complete();
     }
-    observer.complete();
+
+    // call the function
+    produceValue();
 }
 );
 
