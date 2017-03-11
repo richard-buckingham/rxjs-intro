@@ -1,5 +1,11 @@
 import { Observable } from "rxjs";
 
+/*
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/filter";
+*/
+
 // create an observable object
 let numbers = [1, 5, 10];
 let source = Observable.create(observer => {
@@ -20,7 +26,7 @@ let source = Observable.create(observer => {
     // call the function
     produceValue();
 }).map(n => n * 2.1)
-    .filter(n => n < 15)
+    .filter(n => n < 15);
 
 // create another inline observer
 source.subscribe(
