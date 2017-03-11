@@ -10,17 +10,17 @@ let source = Observable.create(observer => {
     let produceValue = () => {
         observer.next(numbers[index++]);
 
-        // simulate data coming in over time.
+        // simulate data coming in asynchronously
         if (index < numbers.length)
-            setTimeout(produceValue, 3000);
+            setTimeout(produceValue, 1000);
         else
             observer.complete();
     }
 
     // call the function
     produceValue();
-}
-);
+}).map(n => n * 2.1)
+    .filter(n => n < 15)
 
 // create another inline observer
 source.subscribe(
